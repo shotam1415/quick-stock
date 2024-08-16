@@ -17,7 +17,7 @@ export default function Modal({ open, setOpen }: { open: boolean, setOpen: (open
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ogp, setOgp] = useState('')
-    const [lastResult, action] = useFormState(registerPost, undefined);
+    const [lastResult, action, pending] = useFormState(registerPost, undefined);
     const router = useRouter();
 
 

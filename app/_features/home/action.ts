@@ -3,10 +3,12 @@
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { registerPostSchema } from "@/app/_validations/form-schema";
-import { db, client } from "@/app/_db/index";
+import { db } from "@/app/_db/index";
 import { posts, userNotes, userNoteTags } from "@/app/_db/schema";
+import { revalidateTag } from 'next/cache'
 
 export async function registerPost(prevState: unknown, formData: FormData) {
+
     const submission = parseWithZod(formData, {
         schema: registerPostSchema,
     });
@@ -33,7 +35,6 @@ export async function registerPost(prevState: unknown, formData: FormData) {
         },
     ).returning({ id: posts.id });
 
-    console.log(post[0].id);
 
     const userNote = await db.insert(userNotes).values([
         {
@@ -50,5 +51,9 @@ export async function registerPost(prevState: unknown, formData: FormData) {
         },
     ]);
 
+
+    console.log('投稿とユーザーノートの作成が完了しました。');
+
+    revalidateTag('/')
     redirect("/?result=success");
 }

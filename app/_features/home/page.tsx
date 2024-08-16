@@ -3,13 +3,10 @@ import Link from "next/link";
 import Modal from "@/app/_components/Modal";
 import { useState } from "react";
 import { PlusIcon } from '@heroicons/react/20/solid'
-import { useSearchParams } from "next/navigation";
 
 
 export default function Home({ localPosts }: any) {
-    const searchParams = useSearchParams();
-    const result = searchParams.get("result");
-    const [open, setOpen] = useState(!!result)
+    const [open, setOpen] = useState(false)
 
     return (
 

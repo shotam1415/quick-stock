@@ -40,7 +40,6 @@ export default async function HOME({
     ); // 必要なカラムをすべてGROUP BYに追加
 
 
-  console.log(localPosts);
 
   return (
     <Home localPosts={localPosts} />
