@@ -49,11 +49,5 @@ export async function registerPost(prevState: unknown, formData: FormData) {
             tagId: '1357f428-a510-8b9f-471f-f9ad027b4e77', // 既存のタグIDを使用
         },
     ]);
-
-
-    await client.end();
-
-
-
     redirect("/?result=success");
 }
