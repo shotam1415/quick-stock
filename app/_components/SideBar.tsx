@@ -168,6 +168,7 @@ export default function SideBar({
                                     onChange={(e) => {
                                         const searchQuery = e.target.value
                                         router.push(`?q=${encodeURIComponent(searchQuery)}`)
+                                        router.refresh()
                                     }} name="search"
                                     type="search"
                                     placeholder="Search..."
