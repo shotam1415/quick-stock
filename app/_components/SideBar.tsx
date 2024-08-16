@@ -2,7 +2,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 import {
     Dialog,
     DialogBackdrop,
@@ -43,7 +43,6 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-import { useSearchParams } from "next/navigation";
 
 
 export default function SideBar({

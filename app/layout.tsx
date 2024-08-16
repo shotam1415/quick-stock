@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SideBar from "./_components/SideBar";
 const inter = Inter({ subsets: ["latin"] });
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SideBar>
-          {children}
-        </SideBar>
+        <Suspense fallback={<>Loading...</>}>
+          <SideBar>
+            {children}
+          </SideBar>
+        </Suspense>
       </body>
     </html>
   );
