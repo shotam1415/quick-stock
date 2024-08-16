@@ -3,10 +3,13 @@ import Link from "next/link";
 import Modal from "@/app/_components/Modal";
 import { useState } from "react";
 import { PlusIcon } from '@heroicons/react/20/solid'
+import { useSearchParams } from "next/navigation";
 
 
 export default function Home({ localPosts }: any) {
-    const [open, setOpen] = useState(false)
+    const searchParams = useSearchParams();
+    const result = searchParams.get("result");
+    const [open, setOpen] = useState(!!result)
 
     return (
 
@@ -54,7 +57,7 @@ export default function Home({ localPosts }: any) {
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
                                     {localPosts.map((item: any) => (
-                                        <tr key={item.title}>
+                                        <tr key={item.id}>
                                             <td className="whitespace-nowrap text-sm font-medium text-gray-9000 sm:pl-0">
                                                 {item.title}
                                             </td>

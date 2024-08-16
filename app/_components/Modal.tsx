@@ -2,10 +2,6 @@
 
 import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useForm } from '@conform-to/react';
-import { parseWithZod } from '@conform-to/zod';
-import { z } from 'zod';
-import { registerPostSchema } from '@/app/_validations/form-schema';
 import { registerPost } from '@/app/_features/home/action';
 import { useFormState } from "react-dom";
 import { Button } from "@/app/_components/Button";
@@ -15,13 +11,13 @@ import { useRouter } from 'next/navigation'
 
 
 export default function Modal({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void }) {
+    const searchParams = useSearchParams();
+    const result = searchParams.get("result");
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ogp, setOgp] = useState('')
     const [lastResult, action] = useFormState(registerPost, undefined);
-    const searchParams = useSearchParams();
-    const result = searchParams.get("result");
     const router = useRouter();
 
 

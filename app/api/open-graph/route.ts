@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
             headers: { 'User-Agent': 'Googlebot' },
         });
         const html = await response.text();
-        console.log(html);
 
         if (!html) {
             return new Response(
