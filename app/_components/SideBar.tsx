@@ -43,13 +43,17 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
+import { useSearchParams } from "next/navigation";
+
+
 export default function SideBar({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const searchParams = useSearchParams();
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const router = useRouter()
+    const [search, setSearch] = useState(searchParams.get("search") || '');
 
     return (
         <>
@@ -165,13 +169,11 @@ export default function SideBar({
                                 />
                                 <input
                                     id="search-field"
-                                    onChange={(e) => {
-                                        const searchQuery = e.target.value
-                                        router.push(`?q=${encodeURIComponent(searchQuery)}`)
-                                        router.refresh()
-                                    }} name="search"
+                                    name="search"
                                     type="search"
                                     placeholder="Search..."
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    value={search || ''}
                                     className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                                 />
                             </form>

@@ -10,14 +10,14 @@ export default async function HOME({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const q = searchParams.q;
+  const search = searchParams.search;
 
 
-  const conditions = q
+  const conditions = search
     ? or(
-      ilike(posts.title, `%${q}%`),
-      ilike(userNotes.content, `%${q}%`),
-      ilike(tags.name, `%${q}%`)
+      ilike(posts.title, `%${search}%`),
+      ilike(userNotes.content, `%${search}%`),
+      ilike(tags.name, `%${search}%`)
     )
     : sql`true`; // qが空の場合は常にtrue
 

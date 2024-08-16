@@ -4,8 +4,10 @@ import Modal from "@/app/_components/Modal";
 import { useState } from "react";
 import { PlusIcon } from '@heroicons/react/20/solid'
 
+
 export default function Home({ localPosts }: any) {
     const [open, setOpen] = useState(false)
+
     return (
 
         <>
