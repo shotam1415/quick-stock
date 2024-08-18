@@ -151,7 +151,7 @@ export default function Modal({ showModal, setShowModal, localTags }: { showModa
                                                     <div className='flex flex-col gap-y-2'>
                                                         {tags.map((item, index) => {
                                                             return (
-                                                                <div className='flex items-center gap-x-2'>
+                                                                <div className='flex items-center gap-x-2' key={index}>
                                                                     <select
                                                                         onChange={(e) => {
                                                                             const newTags = [...tags];
