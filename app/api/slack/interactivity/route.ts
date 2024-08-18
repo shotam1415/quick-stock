@@ -14,8 +14,7 @@ export async function POST(request: Request) {
 
     try {
 
-        const body = await request.json()
-        console.log(body)
+        console.log(request)
         // Send a direct message
         // OAuth トークン
         // #チャンネル名 of @ユーザー名
