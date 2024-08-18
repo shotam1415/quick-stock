@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         const client = new WebClient(SLACK_TOKEN);
 
         if (param_dic.actions[0].action_id === 'tags') {
-            await client.chat.postMessage({ channel, "tagだよ" });
+            await client.chat.postMessage({ channel, text: "tagだよ" });
             return Response.json({ message: 'tagだよ' })
         }
 
