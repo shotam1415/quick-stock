@@ -25,9 +25,6 @@ export async function POST(request: Request) {
                 "type": "divider"
             },
             {
-                "type": "divider"
-            },
-            {
                 "type": "input",
                 "element": {
                     "type": "plain_text_input",
@@ -36,44 +33,6 @@ export async function POST(request: Request) {
                 "label": {
                     "type": "plain_text",
                     "text": "Url",
-                    "emoji": true
-                }
-            },
-            {
-                "type": "input",
-                "element": {
-                    "type": "checkboxes",
-                    "options": [
-                        {
-                            "text": {
-                                "type": "plain_text",
-                                "text": "*plain_text option 0*",
-                                "emoji": true
-                            },
-                            "value": "value-0"
-                        },
-                        {
-                            "text": {
-                                "type": "plain_text",
-                                "text": "*plain_text option 1*",
-                                "emoji": true
-                            },
-                            "value": "value-1"
-                        },
-                        {
-                            "text": {
-                                "type": "plain_text",
-                                "text": "*plain_text option 2*",
-                                "emoji": true
-                            },
-                            "value": "value-2"
-                        }
-                    ],
-                    "action_id": "checkboxes-action"
-                },
-                "label": {
-                    "type": "plain_text",
-                    "text": "Tags",
                     "emoji": true
                 }
             },
@@ -91,9 +50,25 @@ export async function POST(request: Request) {
                         "action_id": "actionId-0"
                     }
                 ]
+            },
+            {
+                "type": "section",
+                "block_id": "section678",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Pick items from the list"
+                },
+                "accessory": {
+                    "action_id": "tags",
+                    "type": "multi_external_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select items"
+                    },
+                    "min_query_length": 1
+                }
             }
         ]
-
 
         const client = new WebClient(SLACK_TOKEN);
         const response = await client.chat.postMessage({ channel, text, blocks });
