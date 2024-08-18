@@ -1,6 +1,6 @@
 // db/seed.ts
 import { db, client } from './index';
-import { users, accounts, posts, categories, userNotes, userNoteTags, tags } from './schema';
+import { users, accounts, posts, userNotes, userNoteTags, tags } from './schema';
 import { sql } from 'drizzle-orm';
 
 
@@ -9,7 +9,6 @@ const seed = async () => {
     await db.delete(userNoteTags);
     await db.delete(userNotes);
     await db.delete(posts);
-    await db.delete(categories);
     await db.delete(tags);
     // await db.delete(users);
     await db.delete(accounts);
@@ -17,29 +16,9 @@ const seed = async () => {
     await db.insert(accounts).values({
         id: 'b0a6c309-a047-4d21-9b41-49d8b0eb5e23',
     })
-    await db.insert(categories).values([
-        {
-            id: 'A2BF75E4-7E59-2A00-89C9-E77E1A2D34A5',
-            accountId: 'b0a6c309-a047-4d21-9b41-49d8b0eb5e23', // 既存のユーザーIDを使用
-            name: 'エンジニアリング',
-            colorCode: '#FF5733',
-            createdAt: sql`now()`,
-            updatedAt: sql`now()`,
-        },
-        {
-            id: 'c06327e6-e9f0-8df5-b7e1-cf7a615bc162',
-            accountId: 'b0a6c309-a047-4d21-9b41-49d8b0eb5e23', // 既存のユーザーIDを使用
-            name: 'デザイン',
-            colorCode: '#33FF57',
-            createdAt: sql`now()`,
-            updatedAt: sql`now()`,
-        }
-    ]);
-
     await db.insert(posts).values([
         {
             id: '48b889b3-a0d9-56ed-fc45-a408aa074df5',
-            categoryId: 'A2BF75E4-7E59-2A00-89C9-E77E1A2D34A5', // 既存のカテゴリーIDを使用
             accountId: 'b0a6c309-a047-4d21-9b41-49d8b0eb5e23', // 既存のユーザーIDを使用
             title: 'ダミー投稿1',
             description: 'ダミー投稿1の説明',
@@ -50,7 +29,6 @@ const seed = async () => {
         },
         {
             id: '1a8deef3-1201-f42e-540f-45fdffae1324',
-            categoryId: 'c06327e6-e9f0-8df5-b7e1-cf7a615bc162', // 既存のカテゴリーIDを使用
             accountId: 'b0a6c309-a047-4d21-9b41-49d8b0eb5e23', // 既存のユーザーIDを使用
             title: 'ダミー投稿2',
             description: 'ダミー投稿2の説明',

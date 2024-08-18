@@ -47,8 +47,10 @@ function classNames(...classes: any) {
 
 export default function SideBar({
     children,
+    modal,
 }: Readonly<{
     children: React.ReactNode;
+    modal?: React.ReactNode;
 }>) {
     const searchParams = useSearchParams();
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -222,7 +224,7 @@ export default function SideBar({
                     </div>
 
                     <main>
-                        <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">{children}</div>
+                        <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">{children} {modal && modal}                        </div>
                     </main>
                 </div>
             </div>

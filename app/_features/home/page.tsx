@@ -1,13 +1,11 @@
 'use client'
 import Link from "next/link";
-import Modal from "@/app/_components/Modal";
 import { useState } from "react";
-import { PlusIcon } from '@heroicons/react/20/solid'
+import { PlusIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
+import Modal from "@/app/_components/Modal";
 
-
-export default function Home({ localPosts }: any) {
-    const [open, setOpen] = useState(false)
-
+export default function Home({ localPosts, localTags }: any) {
+    const [showModal, setShowModal] = useState(false)
     return (
 
         <>
@@ -20,8 +18,7 @@ export default function Home({ localPosts }: any) {
 
 
                         <button
-                            onClick={() => setOpen(true)}
-
+                            onClick={() => setShowModal(true)}
                             type="button"
                             className="rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
@@ -42,11 +39,12 @@ export default function Home({ localPosts }: any) {
                                             Url
                                         </th>
                                         <th scope="col" className="text-left text-sm font-semibold text-gray-900">
-                                            Tags
+                                            Description
                                         </th>
                                         <th scope="col" className="text-left text-sm font-semibold text-gray-900">
-                                            Content
+                                            Tags
                                         </th>
+
                                         <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                             <span className="sr-only">Edit</span>
                                         </th>
@@ -59,6 +57,7 @@ export default function Home({ localPosts }: any) {
                                                 {item.title}
                                             </td>
                                             <td className="whitespace-nowrap text-sm font-medium text-gray-900 sm:pl-0"><Link target="_blank" href={item.url}>{item.url}</Link></td>
+                                            <td className="whitespace-nowrap text-sm text-gray-500">{item.description}</td>
                                             <td className="whitespace-nowrap text-sm font-medium text-gray-900 sm:pl-0">
                                                 <ul className="flex flex-wrap gap-2">
                                                     {item.tags.map((tag: any) => (
@@ -66,11 +65,8 @@ export default function Home({ localPosts }: any) {
                                                     ))}
                                                 </ul>
                                             </td>
-                                            <td className="whitespace-nowrap text-sm text-gray-500">{item.content}</td>
                                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                    Edit<span className="sr-only">Edit</span>
-                                                </a>
+                                                <PencilSquareIcon aria-hidden="true" className="h-5 w-5" />
                                             </td>
                                         </tr>
                                     ))}
@@ -80,7 +76,7 @@ export default function Home({ localPosts }: any) {
                     </div>
                 </div>
             </div>
-            <Modal open={open} setOpen={setOpen} />
+            <Modal showModal={showModal} setShowModal={setShowModal} localTags={localTags} />
         </>
 
     )

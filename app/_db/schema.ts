@@ -20,7 +20,6 @@ export const usersRelations = relations(accounts, ({ many }) => ({
 // posts テーブル
 export const posts = pgTable("posts", {
     id: uuid("id").primaryKey().defaultRandom(),
-    categoryId: uuid("categoryId").notNull().references(() => categories.id),
     accountId: uuid("accountId").notNull().references(() => accounts.id),
     title: text("title"),
     description: text("description"),
@@ -33,9 +32,7 @@ export const posts = pgTable("posts", {
     deletedAt: timestamp("deletedAt"),
 });
 
-export const postsCategoryRelations = relations(posts, ({ one }) => ({
-    category: one(categories, { fields: [posts.categoryId], references: [categories.id] }),
-}));
+
 
 export const postsCreatedUserRelations = relations(posts, ({ one }) => ({
     account: one(accounts, { fields: [posts.accountId], references: [accounts.id] }),
@@ -43,24 +40,6 @@ export const postsCreatedUserRelations = relations(posts, ({ one }) => ({
 
 export const postsNoteRelations = relations(posts, ({ one }) => ({
     userNote: one(userNotes, { fields: [posts.id], references: [userNotes.postId] }),
-}));
-
-
-// categories テーブル
-export const categories = pgTable("categories", {
-    id: uuid("id").primaryKey().defaultRandom(),
-    accountId: uuid("accountId").notNull().references(() => accounts.id),
-    name: text("name"),
-    colorCode: text("colorCode"),
-    createdAt: timestamp('created_at').notNull().defaultNow(),
-    updatedAt: timestamp('updated_at')
-        .notNull()
-        .$onUpdate(() => new Date()),
-    deletedAt: timestamp("deletedAt"),
-});
-
-export const categoriesUserRelations = relations(categories, ({ one }) => ({
-    account: one(accounts, { fields: [categories.accountId], references: [accounts.id] }),
 }));
 
 
@@ -126,8 +105,6 @@ export type InsertUser = typeof accounts.$inferInsert;
 export type SelectUser = typeof accounts.$inferSelect;
 export type InsertPost = typeof posts.$inferInsert;
 export type SelectPost = typeof posts.$inferSelect;
-export type InsertCategory = typeof categories.$inferInsert;
-export type SelectCategory = typeof categories.$inferSelect;
 export type InsertUserNote = typeof userNotes.$inferInsert;
 export type SelectUserNote = typeof userNotes.$inferSelect;
 export type InsertUserNoteTag = typeof userNoteTags.$inferInsert;

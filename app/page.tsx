@@ -25,6 +25,7 @@ export default async function HOME({
   const localPosts = await db.select({
     id: posts.id,
     title: posts.title,
+    description: posts.description,
     url: posts.url,
     content: userNotes.content,
     tags: sql`json_agg(json_build_object('name', ${tags.name}, 'colorCode', ${tags.colorCode}))`.as('tags') // tagsを配列として集約
@@ -37,11 +38,16 @@ export default async function HOME({
     .groupBy(
       posts.id,
       userNotes.id
-    ); // 必要なカラムをすべてGROUP BYに追加
+    );
 
+
+  const localTags = await db.select({
+    id: tags.id,
+    name: tags.name,
+  }).from(tags);
 
 
   return (
-    <Home localPosts={localPosts} />
+    <Home localPosts={localPosts} localTags={localTags} />
   )
 }
