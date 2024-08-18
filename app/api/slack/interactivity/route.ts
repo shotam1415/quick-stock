@@ -13,8 +13,8 @@ export function GET(request: NextRequest) {
 export async function POST(request: Request) {
 
     try {
-
-        console.log(request)
+        const body = await request.json()
+        console.log(body)
         // Send a direct message
         // OAuth トークン
         // #チャンネル名 of @ユーザー名
