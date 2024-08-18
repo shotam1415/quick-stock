@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         // メッセージ
         const text = '*Hello World*';
 
-        if (param_dic.actions[0].value === 'tags') {
+        if (param_dic.actions[0].action_id === 'tags') {
             return Response.json({ message: 'tagだよ' })
         }
 
