@@ -13,8 +13,11 @@ export function GET(request: NextRequest) {
 export async function POST(request: Request) {
 
     try {
-        const body = await request.json()
-        console.log(body)
+        const body = await request.formData(); // Read the form data
+
+        const payload = body.get('payload'); // Extract the payload
+        const param_dic = JSON.parse(payload as string); // Parse the payload as JSON
+        console.log("param:", param_dic);
         // Send a direct message
         // OAuth トークン
         // #チャンネル名 of @ユーザー名
