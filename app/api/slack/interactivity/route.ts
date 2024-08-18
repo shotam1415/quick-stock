@@ -25,6 +25,10 @@ export async function POST(request: Request) {
         // メッセージ
         const text = '*Hello World*';
 
+        if (param_dic.actions[0].value === 'tags') {
+            return Response.json({ message: 'tagだよ' })
+        }
+
 
         const client = new WebClient(SLACK_TOKEN);
         const response = await client.chat.postMessage({ channel, text });
