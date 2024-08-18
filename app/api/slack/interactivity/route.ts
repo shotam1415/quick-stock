@@ -24,13 +24,14 @@ export async function POST(request: Request) {
         const channel = '#kamei-test';
         // メッセージ
         const text = '*Hello World*';
+        const client = new WebClient(SLACK_TOKEN);
 
         if (param_dic.actions[0].action_id === 'tags') {
+            await client.chat.postMessage({ channel, "tagだよ" });
             return Response.json({ message: 'tagだよ' })
         }
 
 
-        const client = new WebClient(SLACK_TOKEN);
         const response = await client.chat.postMessage({ channel, text });
         return Response.json({ message: 'Message sent successfully' })
     } catch (error) {
